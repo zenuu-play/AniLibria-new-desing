@@ -3,7 +3,7 @@ function search(){
     resultOut.innerHTML=''
     if(document.getElementById('navSearch').value != ""){
         $.get({
-            url: 'http://api.anilibria.tv/v2/searchTitles',
+            url: 'https://api.anilibria.tv/v2/searchTitles',
             data: `search=${document.getElementById('navSearch').value}&limit=10&filter=names`,
             success: function(response){
                 resultOut.innerHTML=''
