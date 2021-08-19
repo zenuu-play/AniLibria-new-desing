@@ -2,39 +2,51 @@ body{
     background-color: rgb(39, 38, 49);
     font-family: 'Exo 2', sans-serif;
     background-image: url('../images/backgroud1.jpg');
+    background-attachment: fixed;
 }
 .navbar{
     background-color: rgba(0, 0, 0, 0.158);
     border-bottom: 4px solid rgb(201, 53, 53);
 }
 .main{
-    margin-top: 12%;
-    background-color: #fff;
+    background-color: rgb(202, 202, 202);
     min-height: 700px;
+    height: 100%;
+    border-top: 2px solid rgb(201, 53, 53);
 }
-.footer{
-    background-color: rgb(78, 78, 78);
-    height: 50px;
+.underNav{
+    color: #fff;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+}
+.footer{
+    background-color: rgb(46, 46, 46);
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 4px solid rgb(201, 53, 53);
+    color: #fff;
 }
 .navbar-dark .navbar-nav .nav-link {
     color: rgb(255, 255, 255);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
 }
 .navbar{
     padding: 0;
-    padding-top: 5px;
+    padding-top: 8px;
     font-family: 'Exo 2', sans-serif;
 }
 .navbar-dark .nav-link.active, .navbar-dark .navbar-nav .nav-link {
-    padding-top: 6px;
-    padding-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     position: relative;
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
     margin-right: 5px;
     border-radius: 5px 5px 0 0;
 }
@@ -70,4 +82,11 @@ body{
     border-color: none;
     border: 2px solid rgb(201, 53, 53);
 }
-
+#navSearchResult{
+    word-wrap: break-word;
+    min-width: 100%;
+}
+.dropdown-item{
+    word-wrap: break-word;
+    min-width: 100%;
+}

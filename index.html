@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
     <title>AniLibria - так звучит аниме!</title>
+    <!-- jquery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
@@ -21,65 +24,103 @@
 <body>
     <div class="wrapper">
         <!-- navbar start -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-              <a class="navbar-brand" href="#">
-                <img src="assets/images/logo.png" alt="" width="30" height="30" style="padding: 0; margin-top: -5px;">
-                  AniLibria.tv
-              </a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Главная</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Релизы</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Расписание</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Случайное</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Команда</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Приложения</a>
-                  </li>
-                </ul>
-                <form class="d-flex">
-                  <div class="dropdown" style="padding-bottom: 5px;">
-                    <!-- <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                      Ссылка выпадающего списка
-                    </a> -->
-                    <input class="form-control me-2 dropdown-toggle" type="search" placeholder="Поиск" aria-label="Поиск" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
-                    <ul class="dropdown-menu w-100" aria-labelledby="navSearch">
-                      <li><a class="dropdown-item" href="#">Нечего не найдено:\</a></li>
-                    </ul>
-                  </div>
-                </form>
+      <div>
+        <nav class="navbar navbar-expand-lg navbar-dark" >
+          <div class="container">
+            <a class="navbar-brand" href="https://www.anilibria.tv/">
+              <img src="assets/images/logo.png" alt="" width="30" height="30" style="padding: 0; margin-top: -5px;">
+                AniLibria.tv
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"><i class="fas fa-home"></i> Главная</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-film"></i> Релизы</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-calendar-alt"></i> Расписание</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-users"></i> Команда</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-random"></i> Случайное</a>
+                </li>
+                <li class="nav-item" hidden>
+                  <a class="nav-link" href="https://anilibria.app/"><i class="fas fa-desktop"></i> Приложения</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href=""><i class="fas fa-user"></i> Личный кабинет</a>
+                </li>
+              </ul>
+              <form class="d-flex">
+                <div class="dropdown">
+                  <!-- <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Ссылка выпадающего списка
+                  </a> -->
+                  <input style="margin-top: -7px;" class="form-control me-2 dropdown-toggle" oninput="search()" type="search" placeholder="Поиск" aria-label="Поиск" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
+                  <ul class="dropdown-menu" aria-labelledby="navSearch" id="navSearchResult">
+                    
+                  </ul>
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+        <!-- navbar end -->
+
+        <!-- undernav start -->
+        <div class="underNav">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <img src="/assets/images/logo.png" alt="" height="100">
+                <h3>Спасибо что выбираете нас!</h3>
+                <button class="btn btn-warning"><i class="fas fa-hand-holding-usd"></i> Поддержать проект</button>
               </div>
             </div>
-          </nav>
-        <!-- navbar end -->
+          </div>
+        </div>
+        <!-- undernav end -->
+
+        <!-- main start -->
         <div class="main w-100">
             <div class="container">
-                <div class="row">
-                    <div class="col">
-                        123
+                <div class="row row-cols-1">
+                    <div class="col border">
+                      <h2>Недавно вышедшие серии</h2>     
+                    </div>
+                    <div class="col border">
+                      <h2>Блог команды проекта</h2>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- main end -->
+
+        <!-- footer start -->
         <div class="footer mt-auto">
             <div class="container">
-                Футёр
+                <div id="row">
+                  <div id="col">
+                    <div class="g-1">
+                      <span class="px-2"><i class="fab fa-github"></i> GitHub</span>
+                      <span class="px-2"><i class="fab fa-youtube"></i> YouTube</span>
+                      <span class="px-2"><i class="fab fa-vk"></i> VK</span>
+                      <span class="px-2"><i class="fas fa-link"></i> Оригинальный сайт</span>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
+        <!-- footer end -->
+
     </div>
     <!-- scripts -->
     <script src="assets/scripts/app.js"></script>
