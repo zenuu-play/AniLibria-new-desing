@@ -22,6 +22,20 @@
     <link rel="stylesheet" href="assets/styles/main.css">
 </head>
 <body>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+      ym(84202471, "init", {
+           clickmap:true,
+           trackLinks:true,
+           accurateTrackBounce:true
+      });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/84202471" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
     <div class="wrapper">
         <!-- navbar start -->
       <div>
@@ -63,7 +77,7 @@
                   <!-- <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                     Ссылка выпадающего списка
                   </a> -->
-                  <input style="margin-top: -7px;" class="form-control me-2 dropdown-toggle" oninput="search()" type="search" placeholder="Поиск" aria-label="Поиск" id="navSearch" data-bs-toggle="dropdown" aria-expanded="false">
+                  <input style="margin-top: -7px;" class="form-control" oninput="search()" type="text" placeholder="Поиск" id="navSearch" data-bs-toggle="dropdown">
                   <ul class="dropdown-menu" aria-labelledby="navSearch" id="navSearchResult">
                     
                   </ul>
@@ -93,11 +107,30 @@
         <div class="main w-100">
             <div class="container">
                 <div class="row row-cols-1">
-                    <div class="col border">
-                      <h2>Недавно вышедшие серии</h2>     
+                    <div class="col">
+                      <div class="pageBlock">
+                        <h2><i class="fas fa-calendar-plus"></i> Недавно вышедшее</h2>
+                        <div class="row">
+                          <div class="col-3">
+                            <div class="card">
+                              <div class="card-header">
+                                123
+                              </div>
+                              <div class="card-body">
+                                123
+                              </div>
+    
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>    
                     </div>
-                    <div class="col border">
-                      <h2>Блог команды проекта</h2>
+                    <div class="col">
+                      <div class="pageBlock">
+
+                      </div>
+                     
                     </div>
                 </div>
             </div>
