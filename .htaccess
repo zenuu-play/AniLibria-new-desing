@@ -1,0 +1,17 @@
+AddDefaultCharset UTF-8
+Options -Indexes
+LimitRequestBody 10240000
+ErrorDocument 404  /404
+# Включаем перенаправление
+RewriteEngine On
+# Не применять к существующим файлам файлам
+RewriteCond %{REQUEST_FILENAME} !-f
+# Не применять к существующим директориям
+ RewriteCond %{REQUEST_FILENAME} !-d
+# Редирект всех запросов на index.php
+# L означает Last, нужен чтобы на этом этапе mod_rewrite сразу остановил работу.
+# Короче, небольшое увеличение производительности.
+php_value session.gc_maxlifetime 86400
+php_value session.cookie_lifetime 86400
+
+
