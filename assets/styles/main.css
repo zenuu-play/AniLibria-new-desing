@@ -127,3 +127,22 @@ body{
 #navSearchResult .dropdown-item{
     white-space: pre-wrap;
 }
+.player{
+    text-align: center;
+    color: #fff;
+    background-color: #1e2125   ;
+    border-radius: 10px;
+    border: 3px solid rgb(201, 53, 53);
+    padding-top: 10px;
+    padding-bottom: 60px;
+    height: 550px;
+}
+.player .pTabs{
+    background-color: #1e2125;
+    border-bottom: 2px solid rgb(201, 53, 53);
+    padding-bottom: 10px;
+}
+#player{
+    padding: 50px;
+    border-bottom: 2px solid rgb(201, 53, 53);
+}

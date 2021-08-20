@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
+    <title>Загрузка...</title>
+    <!-- jquery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css">
+    <!-- main style -->
+    <link rel="stylesheet" href="/assets/styles/main.css">
+</head>
+<body>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+      ym(84202471, "init", {
+           clickmap:true,
+           trackLinks:true,
+           accurateTrackBounce:true
+      });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/84202471" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    <div class="wrapper">
+        <!-- navbar start -->
+      <div>
+        <nav class="navbar navbar-expand-xl navbar-dark" >
+          <div class="container">
+            <a class="navbar-brand" href="https://www.anilibria.tv/">
+              <img src="/assets/images/logo.png" alt="" width="30" height="30" style="padding: 0; margin-top: -5px;">
+                AniLibria.tv
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="/"><i class="fas fa-home"></i> Главная</a>
+                </li>
+
+                <li class="nav-item">
+                  <div class="dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" role="button" id="animeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fas fa-film"></i> Аниме
+                    </a>
+                    <ul class="dropdown-menu mx-0 shadow"  aria-labelledby="animeDropdown">
+                      <li>
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                          <i class="fas fa-film"></i>
+                          Релизы
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                          <i class="fas fa-calendar-alt"></i>
+                          Расписание
+                        </a>
+                      </li>
+                    </ul>
+
+                  </div>
+                </li>
+                
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#" onclick="randomTitle()"><i class="fas fa-random"></i> Случайное</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-users"></i> Команда</a>
+                </li>
+
+                <li class="nav-item" hidden>
+                  <a class="nav-link" href="https://anilibria.app/"><i class="fas fa-desktop"></i> Приложения</a>
+                </li>
+                
+                <li class="nav-item">
+                  <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="contact" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fas fa-share-alt"></i> Контакты
+                    </a>
+                    <ul class="dropdown-menu mx-0 shadow"  aria-labelledby="contact">
+                      <li>
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="https://www.youtube.com/channel/UCuF8ghQWaa7K-28llm-K3Zg">
+                          <i class="fab fa-youtube"></i>
+                          YouTube
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="https://discord.gg/anilibria">
+                          <i class="fab fa-discord"></i>
+                          Discord
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="https://vk.com/anilibria">
+                          <i class="fab fa-vk"></i>
+                          Группа VK
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="https://t.me/AniLibria_Top">
+                          <i class="fab fa-telegram"></i>
+                          Telegram
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href=""><i class="fas fa-user"></i> Личный кабинет</a>
+                </li>
+                <li class="nav-item">
+                  <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="searchDrop" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fas fa-search"></i> Поиск
+                    </a>
+                    <div class="dropdown-menu pt-0 mx-0 shadow overflow-hidden" style="width: 280px;" aria-expanded="searchDrop">
+                      <form class="p-2 mb-2 border-bottom">
+                        <input type="text" class="form-control" oninput="search()" autocomplete="false" placeholder="Поиск релизов" id="navSearch">
+                      </form>
+                      <ul class="list-unstyled mb-0" id="navSearchResult">
+                        <li hidden><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                          <span class="d-inline-block bg-success rounded-circle" style="width: .5em; height: .5em;"></span>
+                          Действие
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">Введите название для поиска</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </nav>
+      </div>
+        <!-- navbar end -->
+
+        <!-- undernav start -->
+        <div class="underNav">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <img src="/assets/images/logo.png" alt="" height="100">
+                <h3>Спасибо что выбираете нас!</h3>
+                <button class="btn btn-warning"><i class="fas fa-hand-holding-usd"></i> Поддержать проект</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- undernav end -->
+
+        <!-- main start -->
+        <div class="main w-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col bg-light rounded p-3 mb-5">
+                        <div class="row">
+                            <div class="col-9">
+                                <h2 id="releaseTitle"></h2>
+                                <h4 id="releaseTitleEn"></h4>
+                                <h5 id="releaseTitleAlt"></h5>
+                                <hr>
+                                <div class="discription">
+                                    <div class="text-secondary d-flex flex-column justify-content-evenly" style="font-size: large;">
+                                        <span id="season"></span>
+                                        <span id="type"></span>
+                                        <span id="genres"></span>
+                                        <span id="voice"></span>
+                                        <span id="timings"></span>
+                                        <span id="subs"></span>
+                                    </div>
+                                    <hr>
+                                    <div id="disc" class="" style="font-size: large;"></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <img src="" alt="POSTER" class="img-thumbnail" id="releasePoster">
+                            </div>
+                            <div class="row p-0">
+                                <div class="col-9 p-3 mt-5">
+                                    <div class="player">
+                                        <div class="pTabs">
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-lightbulb"></i> Свет</button>
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-play"></i> Собственный плеер</button>
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-play"></i> Внешний плеер</button>             
+                                            <button class="btn btn-sm btn-danger"><i class="fas fa-bug"></i> Проблемы с плеером?</button>
+                                        </div>
+                                        <div id="player" class="h-100">
+                                            Player
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col border bg-dark text-danger p-2">
+                                    Тут могла быть ваша реклама:)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main end -->
+
+        <!-- footer start -->
+        <div class="footer mt-auto">
+            <div class="container">
+                <div id="row">
+                  <div id="col">
+                    <div class="g-1">
+                      <span class="px-2"><i class="fab fa-github"></i> GitHub</span>
+                      <span class="px-2"><i class="fab fa-youtube"></i> YouTube</span>
+                      <span class="px-2"><i class="fab fa-vk"></i> VK</span>
+                      <span class="px-2"><i class="fas fa-link"></i> Оригинальный сайт</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer end -->
+
+    </div>
+    <!-- scripts -->
+        <script src="/assets/scripts/player.js"></script>
+    <script src="/assets/scripts/app.js"></script>
+    <script>
+        
+
+        var releaseId = window.location.pathname
+        releaseId = releaseId.replace(/\D/gm, '')
+        loadRelease(releaseId)
+
+    </script>
+</body>
+</html>

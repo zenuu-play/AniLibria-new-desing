@@ -1,10 +1,17 @@
 <?php
 
-if($_SERVER['REQUEST_URI'] === '/'){
-    require 'index.html';
-}
-else if(strpos($_SERVER['REQUEST_URI'], '/release') === 0){
-    require 'release.html';
-}else{
-    require '404.html';
-}
+require_once 'router.php';
+
+
+Router::route('/', function(){
+   require 'index.html';
+ });
+
+Router::route('/release/(\d+)', function($release){
+  //print $release;
+  require 'release.html';
+});
+
+// запускаем маршрутизатор, передавая ему запрошенный адрес
+Router::execute($_SERVER['REQUEST_URI']);
+?>
