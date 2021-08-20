@@ -43,17 +43,26 @@ function randomTitle(){
         }
     })
 }
+var limit = 24
+function loadReleases(more){
 
-function loadReleases(){
+    if(more == true){
+        limit = limit+24
+    }
 
-    var card, order_by;
+    var card, order_by, sort_direct;
     var elemReleases = document.getElementById('releases')
+    var filterForm = document.forms.filters;
 
     order_by = document.getElementById('sortBy').value
+    sort_direct = document.getElementById('sortDirection').value
+    if(!sort_direct){
+        sort_direct = 0
+    }
     //order_by = 'in_favorites';
     $.get({
         url: 'https://api.anilibria.tv/v2/advancedSearch',
-        data: `query={in_favorites}&filter=id,names,poster,type,season,in_favorites&sort_direction=1&limit=24&order_by=${order_by}`,
+        data: `query={in_favorites}&filter=id,names,poster,type,season,in_favorites&sort_direction=${sort_direct}&limit=${limit}&order_by=${order_by}`,
         success: function(response){
             console.log(response)
             
@@ -81,8 +90,9 @@ function loadReleases(){
 }
 
 function loadRelease(rid, code){
+    var elTorrents = document.getElementById('torrents')
     $.get({
-        url: 'https://api.anilibria.tv/v2/GET%20/v2/getTitle',
+        url: 'https://api.anilibria.tv/v2/getTitle',
         data: 'id='+rid,
         statusCode: {
             404: function() {
@@ -113,6 +123,29 @@ function loadRelease(rid, code){
 
             document.getElementById('disc').innerHTML=`<span class="text-dark">${response.description}</span>`
 
+
+            response.torrents.list.forEach(elem =>{
+                var item = document.createElement('div')
+                item.className=``
+                item.innerHTML=`
+                <div class="torrent p-2 mt-2 mb-2 d-flex justify-content-center align-items-center">
+                    <span class="px-2">Серия ${elem.series.string} [${elem.quality.string}]</span>
+                    <span class="vr"></span>
+                    <span class="px-2"><i class="fas fa-file"></i> ${formatBytes(elem.total_size)}</span>
+                    <span class="vr"></span>
+                    <span class="px-2"><i class="fas fa-upload text-success"></i> ${elem.seeders}</span>
+                    <span class="px-2"><i class="fas fa-download text-primary"></i> ${elem.leechers}</span>
+                    <span class="vr"></span>
+                    <span class="px-2"><i class="fas fa-file-download text-danger"></i> ${elem.downloads}</span>
+                    <span class="vr"></span>
+                    <span class="px-2"><i class="fas fa-calendar-plus"></i> ${timestampToDate(elem.uploaded_timestamp*1000)}</span>
+                    <a class="btn btn-sm btn-outline-danger" href="https://www.anilibria.tv/${elem.url}">Скачать</a>
+                </div>
+                `
+
+                elTorrents.appendChild(item)
+            })
+
             if(response.names.alternative){
                 document.getElementById('releaseTitleAlt').innerHTML=response.names.alternative
             }
@@ -139,5 +172,106 @@ function loadRelease(rid, code){
     })
 }
 
+function loadFilters(){
+    var elFyear = document.getElementById('filterYear')
+    var elGenre = document.getElementById('filterGenres')
+    var elVoice = document.getElementById('filterVoice')
+    var item;
 
+    $.get({
+        url: 'https://api.anilibria.tv/v2/getYears',
+        success: function(response){
+            response = response.reverse()
+            response.forEach(elem =>{
+                if(elem >= '2025'){
+                    return;
+                }
+                item = document.createElement('li')
+                item.innerHTML=`
+                <a class="dropdown-item">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="${elem}" name="filterYear">
+                    <label class="form-check-label">${elem}</label>
+                    </div>
+                </a>`
+                
+                elFyear.appendChild(item)
+            })
+        }
+    });
 
+    $.get({
+        url: 'https://api.anilibria.tv/v2/getGenres',
+        data: '',
+        success: function(response){
+            response.forEach(elem =>{
+
+                item = document.createElement('li')
+                item.innerHTML=`
+                <a class="dropdown-item">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="${elem}" name="filterGenres">
+                    <label class="form-check-label">${elem}</label>
+                    </div>
+                </a>`
+                
+                elGenre.appendChild(item)
+            })
+        },
+    })
+
+    $.get({
+        url: 'https://api.anilibria.tv/v2/getTeam',
+        data: '',
+        success: function(response){
+            response.team.voice.forEach(elem =>{
+
+                item = document.createElement('li')
+                item.innerHTML=`
+                <a class="dropdown-item">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="${elem}" name="filterVoice">
+                    <label class="form-check-label">${elem}</label>
+                    </div>
+                </a>`
+                
+                elVoice.appendChild(item)
+            })
+        },
+    })
+}
+
+var state = false;
+function light(){
+
+    var elem = document.getElementById('light')
+        if(elem.getAttribute('hidden') == ''){
+            elem.removeAttribute('hidden')
+            setTimeout(function(){
+                elem.style.opacity=1
+            }, 10)
+        }
+        else{
+            elem.style.opacity=0
+            setTimeout(function(){
+                elem.setAttribute('hidden', '')
+            }, 500)
+            
+        }
+}
+function timestampToDate(ts) {
+    var d = new Date();
+    d.setTime(ts);
+    return ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear();
+}
+function formatBytes(bytes, decimals = 2) {
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}

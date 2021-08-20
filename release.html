@@ -37,6 +37,7 @@
     <noscript><div><img src="https://mc.yandex.ru/watch/84202471" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
     <div class="wrapper">
+        <div class="position-fixed h-100 w-100" style="transition: 0.5s ease-in-out 0s; background-color: rgba(0, 0, 0, 0.829); opacity: 0;" id="light" hidden></div>
         <!-- navbar start -->
       <div>
         <nav class="navbar navbar-expand-xl navbar-dark" >
@@ -163,8 +164,8 @@
             <div class="row">
               <div class="col">
                 <img src="/assets/images/logo.png" alt="" height="100">
-                <h3>Спасибо что выбираете нас!</h3>
-                <button class="btn btn-warning"><i class="fas fa-hand-holding-usd"></i> Поддержать проект</button>
+                <h1>Спасибо что выбираете нас!</h1>
+                <a class="btn btn-warning" href="https://www.anilibria.tv/pages/donate.php"><i class="fas fa-hand-holding-usd"></i> Поддержать проект</a>
               </div>
             </div>
           </div>
@@ -190,13 +191,19 @@
         <!-- footer start -->
         <div class="footer mt-auto">
             <div class="container">
-                <div id="row">
-                  <div id="col">
+                <div class="row">
+                  <div class="col d-flex justify-content-between align-items-center">
                     <div class="g-1">
-                      <span class="px-2"><i class="fab fa-github"></i> GitHub</span>
-                      <span class="px-2"><i class="fab fa-youtube"></i> YouTube</span>
-                      <span class="px-2"><i class="fab fa-vk"></i> VK</span>
-                      <span class="px-2"><i class="fas fa-link"></i> Оригинальный сайт</span>
+                      <a class="px-2" href="https://github.com/zenuu-play/AniLibria-new-desing"><i class="fab fa-github"></i> GitHub</a>
+                      <a class="px-2" href="https://www.youtube.com/channel/UCuF8ghQWaa7K-28llm-K3Zg"><i class="fab fa-youtube"></i> YouTube</a>
+                      <a class="px-2" href="https://vk.com/anilibria"><i class="fab fa-vk"></i> VK</a>
+                      <a class="px-2" href="https://www.anilibria.tv/"><i class="fas fa-link"></i> Оригинальный сайт</a>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div>
+                        <span style="font-size: smaller ;">Весь материал на сайте представлен исключительно для домашнего ознакомительного просмотра.
+                            В случаях нарушения авторских прав - обращайтесь на почту <span class="text-warning">anilibria@protonmail.com</span></span>
                     </div>
                   </div>
                 </div>
@@ -217,12 +224,16 @@
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <span>Сортировать по:</span>
-                                    <form method="dialog" onchange="loadReleases()">
+                                    <form method="dialog" onchange="loadReleases()" class="d-flex justify-content-center">
                                         <select class="form-select mx-1" id="sortBy" aria-label="Пример выбора по умолчанию" style="max-width: 200px;">
-                                            <option value="in_favorites">По популярности</option>
-                                            <option value="in_favorites">По дате выхода</option>
-                                            <option value="in_favorites">По дате добавления</option>
+                                            <option value="in_favorites">По рейтингу</option>
+                                            <option value="season">По дате добавления</option>
+                                            <option value="updated">По дате обновления</option>
                                             <option value="name">По названию</option>
+                                        </select>
+                                        <select class="form-select mx-1" id="sortDirection" aria-label="Пример выбора по умолчанию" style="max-width: 200px;">
+                                            <option value="1">По убыванию</option>
+                                            <option value="0">По возрастанию</option>
                                         </select>
                                     </form>
                                 </div>
@@ -241,39 +252,132 @@
             </div>
 
             <div class="row p-0 mt-4">
-                <div class="col-3 bg-light rounded-3 shadow p-4" style="max-height: 350px;">
+                <div class="col-3 bg-light rounded-3 shadow p-4" style="max-height: 600px;">
                     <h3>Фильтр</h3>
                     <hr>
                     <div class="" style="font-weight: 500; font-size: large;">
-                        <form action="" onchange="loadReleases()" method="dialog">
-                            <span>Год выхода:</span>
-                            <select class="form-select" aria-label="Пример выбора по умолчанию">
-                                <option selected></option>
-                                <option value="1">Один</option>
-                                <option value="2">Два</option>
-                                <option value="3">Три</option>
-                            </select>
-    
-                            <span>Сезон:</span>
-                            <select class="form-select" aria-label="Пример выбора по умолчанию">
-                                <option selected></option>
-                                <option value="1">Один</option>
-                                <option value="2">Два</option>
-                                <option value="3">Три</option>
-                            </select>
-    
-                            <span>Год выхода:</span>
-                            <select class="form-select" aria-label="Пример выбора по умолчанию">
-                                <option selected></option>
-                                <option value="1">Один</option>
-                                <option value="2">Два</option>
-                                <option value="3">Три</option>
-                            </select>
+                        <form action="" onchange="" method="dialog" id="filter">
+                            
+                            <div class="dropdown" class="filters">
+                                <div class="">
+                                    <span class="">Год выхода:</span>
+                                    <button class="btn btn-filter" data-bs-toggle="dropdown" aria-expanded="false">Выберете год</button>
+                                    <ul class="dropdown-menu" id="filterYear">
+
+                                    </ul>
+                                </div>
+
+                                <div class="pt-3">
+                                <span class="">Жанры:</span>
+                                <button class="btn btn-filter" data-bs-toggle="dropdown" aria-expanded="false">Выберете жанры</button>
+                                <ul class="dropdown-menu" id="filterGenres">
+                                </ul>
+                                </div>
+
+                                <div class="pt-3">
+                                    <span class="">Сезон:</span>
+                                    <button class="btn btn-filter" data-bs-toggle="dropdown" aria-expanded="false">Выберете сезон</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">Зима</label>
+                                            </div>
+                                        </a></li>
+
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">Весна</label>
+                                            </div>
+                                        </a></li>
+
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">Лето</label>
+                                            </div>
+                                        </a></li>
+
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">Осень</label>
+                                            </div>
+                                        </a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="pt-3">
+                                    <span>Актер озвучки:</span>
+                                    <button class="btn btn-filter" data-bs-toggle="dropdown" aria-expanded="false">Выберете актера</button>
+                                    <ul class="dropdown-menu" id="filterVoice">
+                                    </ul>
+                                </div>
+
+                                <div class="pt-3">
+                                    <span>Статус:</span>
+                                    <button class="btn btn-filter" data-bs-toggle="dropdown" aria-expanded="false">Выберете статус</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">Завершен</label>
+                                            </div>
+                                        </a></li>
+
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">Выходит</label>
+                                            </div>
+                                        </a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="pt-3">
+                                    <span>Тип:</span>
+                                    <button class="btn btn-filter" data-bs-toggle="dropdown" aria-expanded="false">Выберете тип</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">ТВ \ сериал</label>
+                                            </div>
+                                        </a></li>
+
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">Фильм</label>
+                                            </div>
+                                        </a></li>
+
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">OVA \ ONA</label>
+                                            </div>
+                                        </a></li>
+
+                                        <li><a class="dropdown-item" href="#">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <label class="form-check-label">Спешл</label>
+                                            </div>
+                                        </a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
                         </form>
                     </div>
                     </div>
                     <div class="col h-100">
                         <div class="row row-cols-4 g-2" id="releases"></div>
+                        <div class="d-flex justify-content-center pt-3">
+                            <button class="btn btn-danger" onclick="loadReleases(true)">Загрузить еще</button>
+                        </div>
                     </div>
                 </div>
 
@@ -301,11 +405,11 @@
                     <div class="col">
                         <img src="" alt="POSTER" class="img-thumbnail" id="releasePoster">
                     </div>
-                    <div class="row p-0">
-                        <div class="col-9 p-3 mt-5">
-                            <div class="player">
+                    <div class="row p-0 row-cols-2">
+                        <div class="col-9 p-3 mt-5" style="z-index: 9999!important;"> 
+                            <div class="player" >
                                 <div class="pTabs">
-                                    <button class="btn btn-sm btn-danger disabled"><i class="fas fa-lightbulb"></i> Свет</button>
+                                    <button class="btn btn-sm btn-danger" onclick="light()"><i class="fas fa-lightbulb"></i> Свет</button>
                                     <button class="btn btn-sm btn-danger"><i class="fas fa-play"></i> Собственный плеер</button>
                                     <button class="btn btn-sm btn-danger disabled"><i class="fas fa-play"></i> Внешний плеер</button>             
                                     <button class="btn btn-sm btn-danger disabled"><i class="fas fa-bug"></i> Проблемы с плеером?</button>
@@ -317,6 +421,15 @@
                         </div>
                         <div class="col border bg-dark text-danger p-2" hidden>
                             Тут могла быть ваша реклама:)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-9">
+                            <h4>Торренты для скачивания</h4>
+                            <hr>
+                            <div id="torrents">
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -341,6 +454,7 @@
             document.getElementById('releasePage').appendChild(document.getElementById('pageReleases'));
             document.title = 'Вышедшие релизы'
             loadReleases();
+            loadFilters()
         }
 
     </script>

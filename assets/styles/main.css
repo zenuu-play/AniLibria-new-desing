@@ -3,6 +3,7 @@ body{
     font-family: 'Exo 2', sans-serif;
     background-image: url('../images/backgroud1.jpg');
     background-attachment: fixed;
+    z-index: 0;
 }
 .navbar{
     background-color: rgba(0, 0, 0, 0.158);
@@ -24,12 +25,12 @@ body{
     text-align: center;
 }
 .footer{
-    background-color: rgb(46, 46, 46);
+    background-color: rgba(46, 46, 46, 0.63);
     height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 4px solid rgb(201, 53, 53);
+    border-top: 3px solid rgb(201, 53, 53);
     color: #fff;
 }
 .navbar-dark .navbar-nav .nav-link {
@@ -95,11 +96,7 @@ body{
 }
 .btn{
     border-radius: 10px;
-    border: none;
     box-shadow: none;
-}
-.btn:hover{
-    box-shadow: 4px 4px 0px 1px rgba(21, 21, 21, 0.34);
 }
 .pageBlock{
     margin-bottom: 50px;
@@ -111,8 +108,6 @@ body{
 }
 .dropdown-menu{
     top: 20px;
-    transition: all .5s ease-in-out 0s;
-    margin-top: -2px;
     border-radius: 0 0 10px 10px;
     border: 2px solid rgb(201, 53, 53);
     background-color: rgba(59, 59, 59, 0.699);
@@ -136,14 +131,17 @@ body{
     padding-top: 10px;
     padding-bottom: 60px;
     height: 550px;
+    z-index: 9999!important;
 }
 .player .pTabs{
     background-color: #1e2125;
     border-bottom: 2px solid rgb(201, 53, 53);
     padding-bottom: 10px;
+    z-index: 9999!important;
 }
 #player{
     padding: 50px;
+    z-index: 9999!important;
     border-bottom: 2px solid rgb(201, 53, 53);
 }
 hr{
@@ -179,4 +177,68 @@ hr{
 }
 #releases a{
     text-decoration: none;
+}
+.btn-filter .btn, .btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn-filter{
+    color: rgb(87, 87, 87);
+    padding: 5px;
+    min-height: 35px;
+    width: 100%;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: start;
+}
+
+.btn-filter:hover{
+    border: 1px solid rgb(134, 134, 134);
+}
+#filter .dropdown-menu{
+    width: 100%;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid rgb(201, 53, 53);
+    max-height: 250px;
+    overflow-y: scroll;
+}
+#filter .dropdown-item{
+    color: #000;
+    
+}
+.form-check-input:checked {
+    background-color: rgb(201, 53, 53);
+    border-color: rgb(201, 53, 53);
+}
+.form-check-input:focus {
+    border-color: rgba(201, 53, 53, 0.233);
+    outline: 0;
+    box-shadow: none;
+}
+.wrapper::before{
+    position: fixed;
+    display: none;
+    height: 100%;
+    width: 100%;
+    content: ' ';
+    background-color: #1e212563!important;
+}
+.torrent{
+    border-radius: 10px;
+    background-color: rgb(223, 223, 223);
+}
+.footer a{
+    transition: color .1s ease-in-out 0s;
+    text-decoration: none;
+    color: #fff;
+}
+.footer a:hover{
+    text-decoration: none;
+    color: rgb(201, 53, 53);
 }
