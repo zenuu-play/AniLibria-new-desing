@@ -12,6 +12,10 @@ Router::route('/release/(\d+)', function($release){
   require 'release.html';
 });
 
+Router::route('/releases', function(){
+    //print $release;
+    require 'release.html';
+  });
 // запускаем маршрутизатор, передавая ему запрошенный адрес
 Router::execute($_SERVER['REQUEST_URI']);
 ?>

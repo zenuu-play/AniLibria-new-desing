@@ -61,7 +61,7 @@
                     </a>
                     <ul class="dropdown-menu mx-0 shadow"  aria-labelledby="animeDropdown">
                       <li>
-                        <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="/releases">
                           <i class="fas fa-film"></i>
                           Релизы
                         </a>
@@ -175,46 +175,10 @@
         <div class="main w-100">
             <div class="container">
                 <div class="row">
-                    <div class="col bg-light rounded p-3 mb-5">
+                    <div class="col rounded p-3 mb-5" id="releasePage">
                         <div class="row">
-                            <div class="col-9">
-                                <h2 id="releaseTitle"></h2>
-                                <h4 id="releaseTitleEn"></h4>
-                                <h5 id="releaseTitleAlt"></h5>
-                                <hr>
-                                <div class="discription">
-                                    <div class="text-secondary d-flex flex-column justify-content-evenly" style="font-size: large;">
-                                        <span id="season"></span>
-                                        <span id="type"></span>
-                                        <span id="genres"></span>
-                                        <span id="voice"></span>
-                                        <span id="timings"></span>
-                                        <span id="subs"></span>
-                                    </div>
-                                    <hr>
-                                    <div id="disc" class="" style="font-size: large;"></div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <img src="" alt="POSTER" class="img-thumbnail" id="releasePoster">
-                            </div>
-                            <div class="row p-0">
-                                <div class="col-9 p-3 mt-5">
-                                    <div class="player">
-                                        <div class="pTabs">
-                                            <button class="btn btn-sm btn-danger"><i class="fas fa-lightbulb"></i> Свет</button>
-                                            <button class="btn btn-sm btn-danger"><i class="fas fa-play"></i> Собственный плеер</button>
-                                            <button class="btn btn-sm btn-danger"><i class="fas fa-play"></i> Внешний плеер</button>             
-                                            <button class="btn btn-sm btn-danger"><i class="fas fa-bug"></i> Проблемы с плеером?</button>
-                                        </div>
-                                        <div id="player" class="h-100">
-                                            Player
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col border bg-dark text-danger p-2">
-                                    Тут могла быть ваша реклама:)
-                                </div>
+                            <div class="col bg-light rounded shadow p-3">
+                                Загрузка...
                             </div>
                         </div>
                     </div>
@@ -241,16 +205,145 @@
         <!-- footer end -->
 
     </div>
+    <!-- templates -->
+    <div hidden>
+        <div id="pageReleases">
+            <div class="row row-cols-1 bg-light p-3 rounded-3 shadow">
+                <div class="col">
+                    <h2>Список всех релизов АниЛибрии</h2>
+                        <hr>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <span>Сортировать по:</span>
+                                    <form method="dialog" onchange="loadReleases()">
+                                        <select class="form-select mx-1" id="sortBy" aria-label="Пример выбора по умолчанию" style="max-width: 200px;">
+                                            <option value="in_favorites">По популярности</option>
+                                            <option value="in_favorites">По дате выхода</option>
+                                            <option value="in_favorites">По дате добавления</option>
+                                            <option value="name">По названию</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div class="input-group">
+                                          <div class="input-group-text"><i class="fas fa-search"></i></div>
+                                          <input type="text" class="form-control" disabled id="autoSizingInputGroup" placeholder="Введите название тайтла" style="width: 300px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-0 mt-4">
+                <div class="col-3 bg-light rounded-3 shadow p-4" style="max-height: 350px;">
+                    <h3>Фильтр</h3>
+                    <hr>
+                    <div class="" style="font-weight: 500; font-size: large;">
+                        <form action="" onchange="loadReleases()" method="dialog">
+                            <span>Год выхода:</span>
+                            <select class="form-select" aria-label="Пример выбора по умолчанию">
+                                <option selected></option>
+                                <option value="1">Один</option>
+                                <option value="2">Два</option>
+                                <option value="3">Три</option>
+                            </select>
+    
+                            <span>Сезон:</span>
+                            <select class="form-select" aria-label="Пример выбора по умолчанию">
+                                <option selected></option>
+                                <option value="1">Один</option>
+                                <option value="2">Два</option>
+                                <option value="3">Три</option>
+                            </select>
+    
+                            <span>Год выхода:</span>
+                            <select class="form-select" aria-label="Пример выбора по умолчанию">
+                                <option selected></option>
+                                <option value="1">Один</option>
+                                <option value="2">Два</option>
+                                <option value="3">Три</option>
+                            </select>
+                        </form>
+                    </div>
+                    </div>
+                    <div class="col h-100">
+                        <div class="row row-cols-4 g-2" id="releases"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="pageReleaseWath">
+                <div class="row bg-light p-3 rounded-3 shadow">
+                    <div class="col-9">
+                        <h2 id="releaseTitle"></h2>
+                        <h4 id="releaseTitleEn"></h4>
+                        <h5 id="releaseTitleAlt"></h5>
+                        <hr>
+                        <div class="discription">
+                            <div class="text-secondary d-flex flex-column justify-content-evenly" style="font-size: large;">
+                                <span id="season"></span>
+                                <span id="type"></span>
+                                <span id="genres"></span>
+                                <span id="voice"></span>
+                                <span id="timings"></span>
+                                <span id="subs"></span>
+                            </div>
+                            <hr>
+                            <div id="disc" class="" style="font-size: large;"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="" alt="POSTER" class="img-thumbnail" id="releasePoster">
+                    </div>
+                    <div class="row p-0">
+                        <div class="col-9 p-3 mt-5">
+                            <div class="player">
+                                <div class="pTabs">
+                                    <button class="btn btn-sm btn-danger disabled"><i class="fas fa-lightbulb"></i> Свет</button>
+                                    <button class="btn btn-sm btn-danger"><i class="fas fa-play"></i> Собственный плеер</button>
+                                    <button class="btn btn-sm btn-danger disabled"><i class="fas fa-play"></i> Внешний плеер</button>             
+                                    <button class="btn btn-sm btn-danger disabled"><i class="fas fa-bug"></i> Проблемы с плеером?</button>
+                                </div>
+                                <div id="player" class="h-100">
+                                    Player
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col border bg-dark text-danger p-2" hidden>
+                            Тут могла быть ваша реклама:)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- templates -->
     <!-- scripts -->
-        <script src="/assets/scripts/player.js"></script>
+    <script src="/assets/scripts/player.js"></script>
     <script src="/assets/scripts/app.js"></script>
     <script>
         
 
         var releaseId = window.location.pathname
         releaseId = releaseId.replace(/\D/gm, '')
-        loadRelease(releaseId)
+        if(releaseId){
+            loadRelease(releaseId)
+        }
+        else{
+            document.getElementById('releasePage').innerHTML=null;
+            document.getElementById('releasePage').appendChild(document.getElementById('pageReleases'));
+            document.title = 'Вышедшие релизы'
+            loadReleases();
+        }
 
     </script>
 </body>
+
 </html>

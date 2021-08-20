@@ -146,3 +146,37 @@ body{
     padding: 50px;
     border-bottom: 2px solid rgb(201, 53, 53);
 }
+hr{
+    color: rgb(201, 53, 53);
+    opacity: 1;
+}
+.posterAlert{
+}
+.card{
+    border-radius: 10px;
+}
+.rounded-3, .rounded-2, .rounded{
+    border-radius: 10px!important;
+}
+.input-group-text{
+    border: 0;
+    background-color: rgba(255, 255, 255, 0);
+    padding-right: 0;
+}
+.input-group .form-control{
+    border: 0;
+}
+.input-group{
+    border-radius: 10px;
+    border: 2px solid rgb(201, 53, 53);
+}
+.card:hover{
+    border: 3px solid rgb(201, 53, 53);
+}
+.card{
+    border: 3px solid rgba(201, 53, 53, 0);
+    transition: border .1s ease-in-out 0s;
+}
+#releases a{
+    text-decoration: none;
+}
