@@ -120,8 +120,14 @@ function loadRelease(rid, code){
             document.getElementById('voice').innerHTML=`Озвучка: <span class="text-dark">${response.team.voice}</span>`
             document.getElementById('timings').innerHTML=`Тайминги: <span class="text-dark">${response.team.timing}</span>`
             document.getElementById('subs').innerHTML=`Субтитры: <span class="text-dark">${response.team.translator}</span>`
-
             document.getElementById('disc').innerHTML=`<span class="text-dark">${response.description}</span>`
+            
+            if(response.announce){
+                document.getElementById('announce').innerHTML=`${response.announce}`
+            }
+
+
+            document.getElementById('oldLink').setAttribute('href', `https://www.anilibria.tv/release/${response.code}.html`)
 
 
             response.torrents.list.forEach(elem =>{
@@ -259,6 +265,50 @@ function light(){
             
         }
 }
+
+function loadBlog(){
+    var i
+    var elUpdates = document.getElementById('blog')
+    $.get({
+        url: 'https://api.anilibria.tv/v2/getYouTube',
+        data: 'limit=-1',
+        success: function(response){
+            response = response.reverse()
+            response = response.slice(0, 8)
+
+            response.forEach(elem =>{
+                var item = document.createElement('div')
+                item.className=`col`
+                item.innerHTML=`
+                <a class="lastUpdateItem p-0 m-0" href="https://www.youtube.com/watch?v=${elem.id}">
+                  <img src="${elem.image}" alt="" width="300" class="rounded-1 shadow">
+                </a>`
+                elUpdates.appendChild(item)
+            })
+        }
+    })
+}
+
+function loadUpdates(){
+    var elUpdates = document.getElementById('updates')
+    $.get({
+        url: 'https://api.anilibria.tv/v2/getUpdates',
+        data: 'filter=names,code,id,updated,poster&limit=7',
+        success: function(response){
+            response.forEach(elem =>{
+                var item = document.createElement('div')
+                item.className=`col`
+                item.innerHTML=`
+                <a class="lastUpdateItem" href="/release/${elem.id}">
+                  <span class="position-absolute badge bg-light text-dark m-2">${new Date(elem.updated*1000).toLocaleTimeString("ru-RU")}</span>
+                  <img src="https://static.anilibria.tv/${elem.poster.url}" alt="" width="150" class="rounded-1 shadow">
+                </a>`
+                elUpdates.appendChild(item)
+            })
+        }
+    })
+}
+
 function timestampToDate(ts) {
     var d = new Date();
     d.setTime(ts);

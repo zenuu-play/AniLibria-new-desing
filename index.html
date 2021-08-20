@@ -163,8 +163,8 @@
             <div class="row">
               <div class="col">
                 <img src="/assets/images/logo.png" alt="" height="100">
-                <h3>Спасибо что выбираете нас!</h3>
-                <button class="btn btn-warning"><i class="fas fa-hand-holding-usd"></i> Поддержать проект</button>
+                <h1>Спасибо что выбираете нас!</h1>
+                <a class="btn btn-warning" href="https://www.anilibria.tv/pages/donate.php"><i class="fas fa-hand-holding-usd"></i> Поддержать проект</a>
               </div>
             </div>
           </div>
@@ -172,11 +172,22 @@
         <!-- undernav end -->
 
         <!-- main start -->
-        <div class="main w-100">
+        <div class="main w-100 pb-5">
             <div class="container">
-                <div class="row row-cols-2">
-                  <div class="col">
-                    
+                <div class="row">
+                  <div class="col bg-light shadow rounded p-3">
+                    <div>
+                      <h4>Недавно обновленные</h4>
+                        <hr>
+                      <div class="row row-cols-auto d-flex justify-content-center" id="updates">
+
+                      </div>
+                    </div>
+                    <div class="py-4">
+                      <h4>Блог команды проекта</h4>
+                        <hr>
+                        <div class="row row-cols-4 gy-3 d-flex justify-content-center align-items-center m-0 p-0" id="blog"></div>
+                    </div>
                   </div>
                 </div>
             </div>
@@ -209,5 +220,9 @@
     </div>
     <!-- scripts -->
     <script src="assets/scripts/app.js"></script>
+    <script>
+      loadUpdates()
+      loadBlog()
+    </script>
 </body>
 </html>

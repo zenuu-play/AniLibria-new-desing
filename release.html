@@ -404,6 +404,9 @@
                     </div>
                     <div class="col">
                         <img src="" alt="POSTER" class="img-thumbnail" id="releasePoster">
+                        <div class="d-flex justify-content-center pt-3">
+                            <a id="oldLink" class="btn btn-outline-danger">Открыть на ориг. сайте</a>
+                        </div>
                     </div>
                     <div class="row p-0 row-cols-2">
                         <div class="col-9 p-3 mt-5" style="z-index: 9999!important;"> 
@@ -416,6 +419,9 @@
                                 </div>
                                 <div id="player" class="h-100">
                                     Player
+                                </div>
+                                <div>
+                                    <h5 class="pt-1" id="announce"></h5>
                                 </div>
                             </div>
                         </div>
@@ -431,6 +437,11 @@
 
                             </div>
                         </div>
+                        <div class="col-9 pt-3">
+                            <h4>Комментарии</h4>
+                            <hr>
+                            <span>Пока нету:(</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -443,7 +454,7 @@
     <script src="/assets/scripts/app.js"></script>
     <script>
         
-
+        
         var releaseId = window.location.pathname
         releaseId = releaseId.replace(/\D/gm, '')
         if(releaseId){
