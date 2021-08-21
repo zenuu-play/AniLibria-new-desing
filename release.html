@@ -453,9 +453,15 @@
     <script src="./assets/scripts/player.js"></script>
     <script src="./assets/scripts/app.js"></script>
     <script>
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+            });
+            return vars;
+        }
         
-        
-        var releaseId = window.location.pathname
+        var releaseId = getUrlVars()['r'];
         releaseId = releaseId.replace(/\D/gm, '')
         if(releaseId){
             loadRelease(releaseId)
