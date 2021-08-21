@@ -11,7 +11,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 # Редирект всех запросов на index.php
 # L означает Last, нужен чтобы на этом этапе mod_rewrite сразу остановил работу.
 # Короче, небольшое увеличение производительности.
-RewriteRule .* /index.php [QSA,L]
+#RewriteRule .* /index.php [QSA,L]
 php_value session.gc_maxlifetime 86400
 php_value session.cookie_lifetime 86400
 
