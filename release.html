@@ -462,7 +462,6 @@
         }
         
         var releaseId = getUrlVars()['r'];
-        releaseId = releaseId.replace(/\D/gm, '')
         if(releaseId != ''){
             loadRelease(releaseId)
         }
