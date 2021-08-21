@@ -45,6 +45,11 @@ function randomTitle(){
 }
 var limit = 24
 function loadReleases(more){
+    var loader = document.querySelector('.lds-ellipsis')
+    if(loader.getAttribute('hidden') == ''){
+        loader.removeAttribute('hidden')
+    }
+
 
     if(more == true){
         limit = limit+24
@@ -64,6 +69,10 @@ function loadReleases(more){
         url: 'https://api.anilibria.tv/v2/advancedSearch',
         data: `query={in_favorites}&filter=id,names,poster,type,season,in_favorites&sort_direction=${sort_direct}&limit=${limit}&order_by=${order_by}`,
         success: function(response){
+            if(!loader.getAttribute('hidden')){
+                loader.setAttribute('hidden', '')
+            }
+
             console.log(response)
             
             elemReleases.innerHTML=null
