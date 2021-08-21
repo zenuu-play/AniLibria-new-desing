@@ -52,7 +52,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="/"><i class="fas fa-home"></i> Главная</a>
+                  <a class="nav-link" aria-current="page" href="./"><i class="fas fa-home"></i> Главная</a>
                 </li>
 
                 <li class="nav-item">
@@ -62,7 +62,7 @@
                     </a>
                     <ul class="dropdown-menu mx-0 shadow"  aria-labelledby="animeDropdown">
                       <li>
-                        <a class="dropdown-item d-flex gap-2 align-items-center" href="/releases">
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="./release">
                           <i class="fas fa-film"></i>
                           Релизы
                         </a>
@@ -463,7 +463,7 @@
         
         var releaseId = getUrlVars()['r'];
         releaseId = releaseId.replace(/\D/gm, '')
-        if(releaseId){
+        if(releaseId != ''){
             loadRelease(releaseId)
         }
         else{

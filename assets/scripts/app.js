@@ -20,7 +20,7 @@ function search(){
                         status = 'warning'
                     }
                     resultItem = document.createElement('li')
-                    resultItem.innerHTML=`<a class="dropdown-item" href="/release?r=${element.id}"><span class="d-inline-block bg-${status} rounded-circle" style="width: .5em; height: .5em;"></span> ${element.names.ru}</a>`
+                    resultItem.innerHTML=`<a class="dropdown-item" href="./release?r=${element.id}"><span class="d-inline-block bg-${status} rounded-circle" style="width: .5em; height: .5em;"></span> ${element.names.ru}</a>`
                     resultOut.appendChild(resultItem)
                 });
                 if(!response[0]){
@@ -39,7 +39,7 @@ function randomTitle(){
         url: 'https://api.anilibria.tv/v2/getRandomTitle',
         data: 'filter=code,names,id',
         success: function(response){
-            window.location.pathname="/release?r="+ response.id
+            window.location.pathname="./release?r="+ response.id
         }
     })
 }
@@ -72,7 +72,7 @@ function loadReleases(more){
                 card = document.createElement('div')
                 card.className='col'
                 card.innerHTML=`
-                <a href="/release?r=${elem.id}"><div class="card p-2 m-0 shadow btn" type="button">
+                <a href="./release?r=${elem.id}"><div class="card p-2 m-0 shadow btn" type="button">
                 <img class="img rounded-1" src="https://static.anilibria.tv${elem.poster.url}" alt="">
                     <div style="text-align: center;" class="pt-1">
                         <h5 hidden class="text-danger">${elem.names.ru}</h5>
@@ -299,7 +299,7 @@ function loadUpdates(){
                 var item = document.createElement('div')
                 item.className=`col`
                 item.innerHTML=`
-                <a class="lastUpdateItem" href="/release?r=${elem.id}">
+                <a class="lastUpdateItem" href="./release?r=${elem.id}">
                   <span class="position-absolute badge bg-light text-dark m-2">${new Date(elem.updated*1000).toLocaleTimeString("ru-RU")}</span>
                   <img src="https://static.anilibria.tv/${elem.poster.url}" alt="" width="150" class="rounded-1 shadow">
                 </a>`
