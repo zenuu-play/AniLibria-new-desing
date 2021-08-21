@@ -39,7 +39,7 @@ function randomTitle(){
         url: 'https://api.anilibria.tv/v2/getRandomTitle',
         data: 'filter=code,names,id',
         success: function(response){
-            window.location.pathname="./release?r="+ response.id
+            window.location.search="r="+ response.id
         }
     })
 }
