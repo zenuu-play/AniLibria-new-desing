@@ -43,17 +43,22 @@ function randomTitle(){
         }
     })
 }
-var limit = 24
+var limit = 36
 function loadReleases(more){
     var loader = document.querySelector('.lds-ellipsis')
+
     if(loader.getAttribute('hidden') == ''){
         loader.removeAttribute('hidden')
     }
 
-
+    document.querySelector('#loader > button').setAttribute('hidden', '')
+    
     if(more == true){
-        limit = limit+24
+        limit = limit+36
+    }else{
+        
     }
+
 
     var card, order_by, sort_direct;
     var elemReleases = document.getElementById('releases')
@@ -64,19 +69,23 @@ function loadReleases(more){
     if(!sort_direct){
         sort_direct = 0
     }
-    //order_by = 'in_favorites';
+
+    
+    //searchSelected()
+
     $.get({
         url: 'https://api.anilibria.tv/v2/advancedSearch',
         data: `query={in_favorites}&filter=id,names,poster,type,season,in_favorites&sort_direction=${sort_direct}&limit=${limit}&order_by=${order_by}`,
         success: function(response){
             if(!loader.getAttribute('hidden')){
                 loader.setAttribute('hidden', '')
+                document.querySelector('#loader > button').removeAttribute('hidden')
             }
+
+            elemReleases.innerHTML=null
 
             console.log(response)
             
-            elemReleases.innerHTML=null
-
             response.forEach(elem =>{
                 card = document.createElement('div')
                 card.className='col'
@@ -131,7 +140,7 @@ function loadRelease(rid, code){
             document.getElementById('subs').innerHTML=`Субтитры: <span class="text-dark">${response.team.translator}</span>`
             document.getElementById('disc').innerHTML=`<span class="text-dark">${response.description}</span>`
             
-            if(response.announce){
+            if(response.announce && response.status.string == 'В работе'){
                 document.getElementById('announce').innerHTML=`${response.announce}`
             }
 
@@ -333,4 +342,26 @@ function formatBytes(bytes, decimals = 2) {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+
+/**
+ * Возвращает выбранные элементы в форме фильтров 
+ * Возвращает объект
+ * @param form Форма с фильтрами. По умолчанию form="filter"
+ */
+function searchSelected(form = 'filter'){
+    if(!form){ console.error('Element not defined'); return;}
+
+    var out = new Object();
+    var elem = document.querySelectorAll('form#'+form+' input[name]');
+    var i = 0
+
+    elem.forEach(function(element, key){
+        if(!element.checked){return}
+
+        out[i] = {"name": element.name,"value": element.value, "checked": element.checked}
+        i++
+    })
+    return out
 }

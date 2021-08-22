@@ -240,12 +240,6 @@
                                     </form>
                                 </div>
                                 <div>
-                                    <div>
-                                        <div class="input-group">
-                                          <div class="input-group-text"><i class="fas fa-search"></i></div>
-                                          <input type="text" class="form-control" disabled id="autoSizingInputGroup" placeholder="Введите название тайтла" style="width: 300px;">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -258,8 +252,7 @@
                     <h3><i class="fas fa-filter"></i> Фильтр</h3>
                     <hr>
                     <div class="" style="font-weight: 500; font-size: large;">
-                        <form action="" onchange="" method="dialog" id="filter">
-                            
+                        <form onchange="searchSelected()" method="dialog" id="filter" name="filter">
                             <div class="dropdown" class="filters">
                                 <div class="">
                                     <span class="">Год выхода:</span>
@@ -282,28 +275,28 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="checkbox" value="Зима" name="filterSeason">
                                                 <label class="form-check-label">Зима</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="checkbox" value="Весна" name="filterSeason">
                                                 <label class="form-check-label">Весна</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="checkbox" value="Лето" name="filterSeason">
                                                 <label class="form-check-label">Лето</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="checkbox" value="Осень" name="filterSeason">
                                                 <label class="form-check-label">Осень</label>
                                             </div>
                                         </a></li>
@@ -323,15 +316,15 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="radio" value="Завершен" name="filterStatus">
                                                 <label class="form-check-label">Завершен</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
-                                                <label class="form-check-label">Выходит</label>
+                                                <input class="form-check-input" type="radio" value="Выходит" name="filterStatus">
+                                                <label class="form-radio-label">Выходит</label>
                                             </div>
                                         </a></li>
                                     </ul>
@@ -343,28 +336,28 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="checkbox" value="ТВ" name="filterType">
                                                 <label class="form-check-label">ТВ \ сериал</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="checkbox" value="Фильм" name="filterType">
                                                 <label class="form-check-label">Фильм</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="checkbox" value="OVA" name="filterType">
                                                 <label class="form-check-label">OVA \ ONA</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
+                                                <input class="form-check-input" type="checkbox" value="Спешл" name="filterType">
                                                 <label class="form-check-label">Спешл</label>
                                             </div>
                                         </a></li>
@@ -378,11 +371,10 @@
                     <div class="col h-100">
                         <div class="row row-cols-4 g-2" id="releases"></div>
                         <div class="d-flex justify-content-center pt-3">
-                            <div class="d-flex justify-content-center flex-column align-items-center">
+                            <div class="d-flex justify-content-center flex-column align-items-center" id="loader">
                                 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-                                <button class="btn btn-danger" onclick="loadReleases(true)"><i class="fas fa-caret-square-down"></i> Загрузить еще</button>
+                                <button class="btn btn-danger" onclick="loadReleases(true)" hidden><i class="fas fa-caret-square-down"></i> Загрузить еще</button>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -446,7 +438,7 @@
                         <div class="col-9 pt-3">
                             <h4><i class="fas fa-comments"></i> Комментарии</h4>
                             <hr>
-                            <span>Пока нету:(</span>
+                            <span>Временно недоступны</span>
                         </div>
                     </div>
                 </div>
