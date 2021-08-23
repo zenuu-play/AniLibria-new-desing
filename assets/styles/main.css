@@ -382,3 +382,11 @@ hr{
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
+.day{
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content:space-between;
+    background-color: rgb(201, 53, 53);
+    border-radius: 10px;
+}

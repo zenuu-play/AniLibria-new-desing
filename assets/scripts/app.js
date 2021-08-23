@@ -44,7 +44,8 @@ function randomTitle(){
     })
 }
 var limit = 36
-function loadReleases(more){
+function loadReleases(more, mainEl){
+    var mainEl;
     var loader = document.querySelector('#loader')
 
     if(loader.getAttribute('hidden') == ''){
@@ -100,15 +101,21 @@ function loadReleases(more){
                 elemReleases.appendChild(card)
 
             });
-
         }
     })
 }
 
 
-function loadRelease(){
+function loadRelease(mainEl){
+    var mainEl = document.querySelector('.releasePage')
+    var spinner = document.querySelector('.releasePage, .loader')
+
+
     var rid = getUrlVars()['r']
     var elTorrents = document.getElementById('torrents')
+
+    mainEl.setAttribute('hidden', '')
+    spinner.removeAttribute('hidden')
 
     $.get({
         url: 'https://api.anilibria.tv/v2/getTitle',
@@ -182,6 +189,8 @@ function loadRelease(){
 
             //Debug
             //console.log(response)
+            spinner.setAttribute('hidden', '')
+            mainEl.removeAttribute('hidden')
         }
     })
 }
@@ -209,8 +218,9 @@ function loadFilters(){
                     </div>
                 </a>`
                 
-                elFyear.appendChild(item)
+                
             })
+            elFyear.appendChild(item)
         }
     });
 
@@ -299,7 +309,7 @@ function loadUpdates(){
     })
 }
 
-function loadCalendar(El = 'pageCalendar'){
+function loadCalendar(mainEl = 'pageCalendar'){
     var mainEl, opened = 'hide'
     var el = document.getElementById('calendar')
     var days = [
@@ -318,6 +328,7 @@ function loadCalendar(El = 'pageCalendar'){
         url: 'https://api.anilibria.tv/v2/getSchedule',
         data: 'filter=poster,names,id,status,type,day,player,series',
         success: function(response){
+            
             response.forEach(elem =>{
 
                 var calendarItem = document.createElement('div')
@@ -366,11 +377,19 @@ function loadCalendar(El = 'pageCalendar'){
 
                 el.appendChild(calendarItem)
             })
+
         }
     })
 
 }
 
+function loadTeam(){
+
+    $.get({
+
+    })
+
+}
 
 function light(){
     var elem = document.getElementById('light')
@@ -389,6 +408,8 @@ function light(){
         
     }
 }
+
+
 
 function timestampToDate(ts) {
     var d = new Date();

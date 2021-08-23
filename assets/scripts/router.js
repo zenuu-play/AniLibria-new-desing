@@ -6,8 +6,8 @@ var pages = [
 ]
     
 var specialPages = new Object({
-    '404': { el: 'page404', title: 'Нечего не найдено :/' },
-    'loader': { el: 'spin', title: 'Загрузка...' }
+    'error': { el: 'page404', title: 'Нечего не найдено :/' },
+    'loader': { el: '.spin', title: 'Загрузка...' }
 })
 
 function hashRouter(){
@@ -28,12 +28,11 @@ function hashRouter(){
 
             document.title = element.title
 
-            document.getElementById('mainBlank').innerHTML=''
             document.getElementById('mainBlank').innerHTML=document.getElementById(element.el).outerHTML
 
             if(element.callback){
                 element.callback.forEach(elem =>{
-                    testfunc(elem)
+                    testfunc(elem, element.el)
                 })
             }   
         }
@@ -43,6 +42,7 @@ function hashRouter(){
     }
 }
 
-function testfunc(callback){
-    return callback()
+
+function testfunc(callback, el){
+    return callback(mainEl = el)
 }
