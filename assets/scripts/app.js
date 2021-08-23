@@ -150,7 +150,7 @@ function loadRelease(){
             response.torrents.list.forEach(elem =>{
 
                 var item = document.createElement('div')
-                
+
                 item.className=``
                 item.innerHTML=`
                 <div class="torrent p-2 mt-2 mb-2 d-flex justify-content-center align-items-center">
@@ -255,23 +255,6 @@ function loadFilters(){
     })
 }
 
-function light(){
-    var elem = document.getElementById('light')
-
-    if(elem.getAttribute('hidden') == ''){
-        elem.removeAttribute('hidden')
-        setTimeout(function(){
-            elem.style.opacity=1
-        }, 10)
-    }
-    else{
-        elem.style.opacity=0
-        setTimeout(function(){
-            elem.setAttribute('hidden', '')
-        }, 500)
-        
-    }
-}
 
 function loadBlog(){
     var i
@@ -314,6 +297,97 @@ function loadUpdates(){
             })
         }
     })
+}
+
+function loadCalendar(El = 'pageCalendar'){
+    var mainEl, opened = 'hide'
+    var el = document.getElementById('calendar')
+    var days = [
+        'Понедельник',
+        'Вторник',
+        'Среда',
+        'Четверг',
+        'Пятница',
+        'Суббота',
+        'Воскресенье',
+    ]
+    let date = new Date()
+    date.getDay()
+
+    $.get({
+        url: 'https://api.anilibria.tv/v2/getSchedule',
+        data: 'filter=poster,names,id,status,type,day,player,series',
+        success: function(response){
+            response.forEach(elem =>{
+
+                var calendarItem = document.createElement('div')
+
+                if(date.getDay() == elem.day+1){
+                    opened = 'show'
+                    days[elem.day] = days[elem.day] +" [Сегодня]"
+                }
+                else{
+                    opened = 'hide'
+                }
+
+                calendarItem.className='accordion-item'
+                calendarItem.innerHTML=`
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#day${elem.day}-collapseOne" aria-expanded="false">
+                   ${days[elem.day]}
+                  </button>
+                </h2>
+                <div id="day${elem.day}-collapseOne" class="accordion-collapse collapse ${opened}">
+                  <div class="accordion-body">
+                      <div class="row row-cols-2 calendarItems">
+
+                      </div>
+                  </div>
+                </div>`
+                elem.list.forEach(item =>{
+
+                    var calendarSerial = document.createElement('div')
+                    calendarSerial.className='col p-1'
+                    calendarSerial.innerHTML=`
+                    <a class="calendar" href="./release#watch?r=${item.id}">
+                        <div class="calendar-img">
+                            <img src="https://static.anilibria.tv/${item.poster.url}" alt="" class="rounded">
+                        </div>
+                        <div class="calendar-body">
+                            <h5>${item.names.ru}</h5>
+                            <h6>${item.names.en}</h6>
+                            <span>Серий ${item.type.series}</span>
+                        </div>
+                    </a>`
+
+                    calendarItem.querySelector('.calendarItems').appendChild(calendarSerial)
+
+                })
+
+                el.appendChild(calendarItem)
+            })
+        }
+    })
+
+}
+
+
+function light(){
+    var elem = document.getElementById('light')
+
+    if(elem.getAttribute('hidden') == ''){
+        elem.removeAttribute('hidden')
+        setTimeout(function(){
+            elem.style.opacity=1
+        }, 10)
+    }
+    else{
+        elem.style.opacity=0
+        setTimeout(function(){
+            elem.setAttribute('hidden', '')
+        }, 500)
+        
+    }
 }
 
 function timestampToDate(ts) {

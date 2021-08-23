@@ -1,6 +1,6 @@
 var pages = [
     { el: 'pageReleases', hash: '', title: 'Релизы', callback: [ loadReleases, loadFilters ] },
-    { el: 'pageCalendar', hash: '#calendar', title: 'Расписание'},
+    { el: 'pageCalendar', hash: '#calendar', title: 'Расписание', callback: [loadCalendar]},
     { el: 'pageTeam', hash: '#team', title: 'Команда проекта'},
     { el: 'pageReleaseWatch', hash: '#watch', title: 'Загрузка...', callback: [ loadRelease ]},
 ]
@@ -38,11 +38,11 @@ function hashRouter(){
             }   
         }
     });
+    onhashchange = function(){
+        hashRouter()
+    }
+}
 
-}
-onhashchange = function(){
-    hashRouter()
-}
 function testfunc(callback){
     return callback()
 }
