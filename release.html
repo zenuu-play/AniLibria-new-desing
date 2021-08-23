@@ -91,7 +91,7 @@
                   <a class="nav-link" href="https://anilibria.app/"><i class="fas fa-desktop"></i> Приложения</a>
                 </li>
                 
-                <li class="nav-item">
+                <li class="nav-item" hidden>
                   <div class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="contact" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="fas fa-share-alt"></i> Контакты
@@ -228,10 +228,9 @@
                                     <span>Сортировать по:</span>
                                     <form method="dialog" onchange="loadReleases()" class="d-flex justify-content-center">
                                         <select class="form-select mx-1" id="sortBy" aria-label="Пример выбора по умолчанию" style="max-width: 200px;">
-                                            <option value="in_favorites">По рейтингу</option>
+                                            <option value="in_favorites">По популярности</option>
                                             <option value="season">По дате добавления</option>
                                             <option value="updated">По дате обновления</option>
-                                            <option value="name">По названию</option>
                                         </select>
                                         <select class="form-select mx-1" id="sortDirection" aria-label="Пример выбора по умолчанию" style="max-width: 200px;">
                                             <option value="1">По убыванию</option>
@@ -250,9 +249,11 @@
             <div class="row p-0 mt-4">
                 <div class="col-3 bg-light rounded-3 shadow p-4" style="max-height: 600px;">
                     <h3><i class="fas fa-filter"></i> Фильтр</h3>
+                    <span class="text-danger">Временно не работает</span>
                     <hr>
                     <div class="" style="font-weight: 500; font-size: large;">
-                        <form onchange="searchSelected()" method="dialog" id="filter" name="filter">
+                        <form onchange="" method="dialog" id="filter" name="filter">
+                        <!-- <form onchange="loadReleases()" method="dialog" id="filter" name="filter"> -->
                             <div class="dropdown" class="filters">
                                 <div class="">
                                     <span class="">Год выхода:</span>
@@ -275,28 +276,28 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Зима" name="filterSeason">
+                                                <input class="form-check-input" type="checkbox" value="1" name="filterSeason">
                                                 <label class="form-check-label">Зима</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Весна" name="filterSeason">
+                                                <input class="form-check-input" type="checkbox" value="2" name="filterSeason">
                                                 <label class="form-check-label">Весна</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Лето" name="filterSeason">
+                                                <input class="form-check-input" type="checkbox" value="3" name="filterSeason">
                                                 <label class="form-check-label">Лето</label>
                                             </div>
                                         </a></li>
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Осень" name="filterSeason">
+                                                <input class="form-check-input" type="checkbox" value="4" name="filterSeason">
                                                 <label class="form-check-label">Осень</label>
                                             </div>
                                         </a></li>
@@ -323,7 +324,7 @@
 
                                         <li><a class="dropdown-item" href="#">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" value="Выходит" name="filterStatus">
+                                                <input class="form-check-input" type="radio" value="В работе" name="filterStatus">
                                                 <label class="form-radio-label">Выходит</label>
                                             </div>
                                         </a></li>

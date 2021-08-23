@@ -55,10 +55,7 @@ function loadReleases(more){
     
     if(more == true){
         limit = limit+36
-    }else{
-        
     }
-
 
     var card, order_by, sort_direct;
     var elemReleases = document.getElementById('releases')
@@ -70,12 +67,13 @@ function loadReleases(more){
         sort_direct = 0
     }
 
+    var filters = '';
     
-    //searchSelected()
 
     $.get({
         url: 'https://api.anilibria.tv/v2/advancedSearch',
-        data: `query={in_favorites}&filter=id,names,poster,type,season,in_favorites&sort_direction=${sort_direct}&limit=${limit}&order_by=${order_by}`,
+        //data: `limit=${limit}&filter=id,names,poster,type,season,in_favorites${getUrlSelected()}`,
+        data: `query={in_favorites}${filters}&filter=id,names,poster,type,season,in_favorites&sort_direction=${sort_direct}&limit=${limit}&order_by=${order_by}`,
         success: function(response){
             if(!loader.getAttribute('hidden')){
                 loader.setAttribute('hidden', '')
@@ -84,7 +82,7 @@ function loadReleases(more){
 
             elemReleases.innerHTML=null
 
-            console.log(response)
+            //console.log(response)
             
             response.forEach(elem =>{
                 card = document.createElement('div')
@@ -106,6 +104,7 @@ function loadReleases(more){
         }
     })
 }
+
 
 function loadRelease(rid, code){
     var elTorrents = document.getElementById('torrents')
@@ -164,8 +163,7 @@ function loadRelease(rid, code){
                     <span class="vr"></span>
                     <span class="px-2"><i class="fas fa-calendar-plus"></i> ${timestampToDate(elem.uploaded_timestamp*1000)}</span>
                     <a class="btn btn-sm btn-outline-danger" href="https://www.anilibria.tv/${elem.url}">Скачать</a>
-                </div>
-                `
+                </div>`
 
                 elTorrents.appendChild(item)
             })
@@ -214,8 +212,8 @@ function loadFilters(){
                 item.innerHTML=`
                 <a class="dropdown-item">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="${elem}" name="filterYear">
-                    <label class="form-check-label">${elem}</label>
+                        <input class="form-check-input" type="checkbox" value="${elem}" id="filterYear${elem}" name="filterYear">
+                        <label class="form-check-label" for="filterYear${elem}">${elem}</label>
                     </div>
                 </a>`
                 
@@ -234,8 +232,8 @@ function loadFilters(){
                 item.innerHTML=`
                 <a class="dropdown-item">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="${elem}" name="filterGenres">
-                    <label class="form-check-label">${elem}</label>
+                        <input class="form-check-input" type="checkbox" value="${elem}" id="filterGenres${elem}" name="filterGenres">
+                        <label class="form-check-label" for="filterGenres${elem}">${elem}</label>
                     </div>
                 </a>`
                 
@@ -254,8 +252,8 @@ function loadFilters(){
                 item.innerHTML=`
                 <a class="dropdown-item">
                     <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="${elem}" name="filterVoice">
-                    <label class="form-check-label">${elem}</label>
+                        <input class="form-check-input" type="checkbox" value="${elem}" id="filterVoice${elem}" name="filterVoice">
+                        <label class="form-check-label" for="filterVoice${elem}">${elem}</label>
                     </div>
                 </a>`
                 
@@ -265,23 +263,22 @@ function loadFilters(){
     })
 }
 
-var state = false;
 function light(){
-
     var elem = document.getElementById('light')
-        if(elem.getAttribute('hidden') == ''){
-            elem.removeAttribute('hidden')
-            setTimeout(function(){
-                elem.style.opacity=1
-            }, 10)
-        }
-        else{
-            elem.style.opacity=0
-            setTimeout(function(){
-                elem.setAttribute('hidden', '')
-            }, 500)
-            
-        }
+
+    if(elem.getAttribute('hidden') == ''){
+        elem.removeAttribute('hidden')
+        setTimeout(function(){
+            elem.style.opacity=1
+        }, 10)
+    }
+    else{
+        elem.style.opacity=0
+        setTimeout(function(){
+            elem.setAttribute('hidden', '')
+        }, 500)
+        
+    }
 }
 
 function loadBlog(){
@@ -332,6 +329,7 @@ function timestampToDate(ts) {
     d.setTime(ts);
     return ('0' + d.getDate()).slice(-2) + '.' + ('0' + (d.getMonth() + 1)).slice(-2) + '.' + d.getFullYear();
 }
+
 function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return '0 Bytes';
 
@@ -347,21 +345,63 @@ function formatBytes(bytes, decimals = 2) {
 
 /**
  * Возвращает выбранные элементы в форме фильтров 
- * Возвращает объект
  * @param form Форма с фильтрами. По умолчанию form="filter"
  */
-function searchSelected(form = 'filter'){
+function getSelected(form = 'filter'){
     if(!form){ console.error('Element not defined'); return;}
 
     var out = new Object();
     var elem = document.querySelectorAll('form#'+form+' input[name]');
-    var i = 0
 
     elem.forEach(function(element, key){
-        if(!element.checked){return}
+        
 
-        out[i] = {"name": element.name,"value": element.value, "checked": element.checked}
-        i++
+        if(!out[element.name]){
+            out[element.name] = new Array()
+        }
+        if(element.checked){
+            out[element.name].push(element.value)
+        }
+        
+
     })
+
+    if(Object.keys(out).length == 0){
+        out = null;
+    }
     return out
 }
+
+function getUrlSelected(selected = getSelected()){
+    var selected;
+    var type, filter = [], out;
+    var types = {
+        "filterYear": 'year', 
+        "filterVoice": 'voice', 
+        "filterGenres": 'genres', 
+        "filterStatus": 'status', 
+        "filterSeason": 'season_code', 
+        "filterType": 'type'}
+
+    if(selected){
+        Object.keys(selected).forEach(element =>{
+            if(Object.keys(selected[element]).length != 0){
+
+                type = types[element]
+
+                selected[element] = type + "=" + selected[element]
+                filter.push(selected[element])
+            } 
+        })
+    }
+    if(filter.join('&')){
+        out = "&" + filter.join('&')
+    }
+    else{
+        out = ''
+    }
+
+    return out
+}
+
+
