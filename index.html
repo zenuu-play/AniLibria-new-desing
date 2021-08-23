@@ -48,8 +48,8 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+              <ul class="navbar-nav mb-2 mb-lg-0 ">
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="./"><i class="fas fa-home"></i> Главная</a>
                 </li>
@@ -61,13 +61,13 @@
                     </a>
                     <ul class="dropdown-menu mx-0 shadow"  aria-labelledby="animeDropdown">
                       <li>
-                        <a class="dropdown-item d-flex gap-2 align-items-center" href="./release.html">
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="./release">
                           <i class="fas fa-film"></i>
                           Релизы
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="#calendar">
                           <i class="fas fa-calendar-alt"></i>
                           Расписание
                         </a>
@@ -76,10 +76,9 @@
 
                   </div>
                 </li>
-                
-
+            
                 <li class="nav-item">
-                  <a class="nav-link" href="" onclick="randomTitle()"><i class="fas fa-random"></i> Случайное</a>
+                  <a class="nav-link" href="#" onclick="randomTitle()"><i class="fas fa-random"></i> Случайное</a>
                 </li>
 
                 <li class="nav-item">
@@ -126,32 +125,31 @@
                 <li class="nav-item">
                   <a class="nav-link disabled" href=""><i class="fas fa-user"></i> Профиль</a>
                 </li>
-                <li class="nav-item">
-                  <div class="dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" id="searchDrop" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="fas fa-search"></i> Поиск
-                    </a>
-                    <div class="dropdown-menu pt-0 mx-0 shadow overflow-hidden" style="width: 280px;" aria-expanded="searchDrop">
-                      <form class="p-2 mb-2 border-bottom">
-                        <input type="text" class="form-control" oninput="search()" autocomplete="false" placeholder="Поиск релизов" id="navSearch">
-                      </form>
-                      <ul class="list-unstyled mb-0" id="navSearchResult">
-                        <li hidden><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                          <span class="d-inline-block bg-success rounded-circle" style="width: .5em; height: .5em;"></span>
-                          Действие
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">Введите название для поиска</a>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                </li>
               </ul>
-
+                <div class="d-flex">
+                    <div class="dropdown">
+                      <a class="text-light btn btn-outline-danger my-2 dropdown-toggle" href="#" role="button" id="searchDrop" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-search"></i> Поиск
+                      </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg pt-0 mx-0 shadow overflow-hidden" style="width: 380px;" aria-expanded="searchDrop">
+                            <form class="p-2 mb-2 border-bottom">
+                              <input type="text" class="form-control" oninput="search()" autocomplete="false" placeholder="Поиск релизов" id="navSearch">
+                            </form>
+                            <ul class="list-unstyled mb-0" id="navSearchResult">
+                              <li hidden><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                <span class="d-inline-block bg-success rounded-circle" style="width: .5em; height: .5em;"></span>
+                                Действие
+                                </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="#">Введите название для поиска</a>
+                              </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
+
           </div>
         </nav>
       </div>

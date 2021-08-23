@@ -6,6 +6,7 @@ body{
     z-index: 0;
 }
 .navbar{
+    transition: all .2s ease-in-out 0s;
     background-color: rgba(0, 0, 0, 0.158);
     border-bottom: 4px solid rgb(201, 53, 53);
 }
@@ -39,7 +40,7 @@ body{
     font-weight: 500;
 }
 .navbar{
-    padding: 0;
+    padding: 0px;
     font-family: 'Exo 2', sans-serif;
 }
 .navbar-dark .nav-link.active, .navbar-dark .navbar-nav .nav-link {
@@ -302,5 +303,9 @@ hr{
     }
   }
 
-
+.navbarPanel {
+    position: relative;
+    top: 0;
+    z-index: 10;
+}
   

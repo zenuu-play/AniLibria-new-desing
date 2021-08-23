@@ -39,8 +39,9 @@
     <div class="wrapper">
         <div class="position-fixed h-100 w-100" style="transition: 0.5s ease-in-out 0s; background-color: rgba(0, 0, 0, 0.829); opacity: 0;" id="light" hidden></div>
         <!-- navbar start -->
-      <div>
-        <nav class="navbar navbar-expand-xl navbar-dark" >
+        
+      <div class="navbarPanel">
+        <nav class="navbar navbar-expand-xl navbar-dark">
           <div class="container">
             <a class="navbar-brand" href="https://www.anilibria.tv/">
               <img src="./assets/images/logo.png" alt="" width="30" height="30" style="padding: 0; margin-top: -5px;">
@@ -49,8 +50,8 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+              <ul class="navbar-nav mb-2 mb-lg-0 ">
                 <li class="nav-item">
                   <a class="nav-link" aria-current="page" href="./"><i class="fas fa-home"></i> Главная</a>
                 </li>
@@ -68,7 +69,7 @@
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                        <a class="dropdown-item d-flex gap-2 align-items-center" href="#calendar">
                           <i class="fas fa-calendar-alt"></i>
                           Расписание
                         </a>
@@ -77,14 +78,13 @@
 
                   </div>
                 </li>
-                
-
+            
                 <li class="nav-item">
                   <a class="nav-link" href="#" onclick="randomTitle()"><i class="fas fa-random"></i> Случайное</a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="#"><i class="fas fa-users"></i> Команда</a>
+                  <a class="nav-link" href="#team"><i class="fas fa-users"></i> Команда</a>
                 </li>
 
                 <li class="nav-item" hidden>
@@ -127,31 +127,29 @@
                 <li class="nav-item">
                   <a class="nav-link disabled" href=""><i class="fas fa-user"></i> Профиль</a>
                 </li>
-                <li class="nav-item">
-                  <div class="dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" id="searchDrop" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="fas fa-search"></i> Поиск
-                    </a>
-                    <div class="dropdown-menu pt-0 mx-0 shadow overflow-hidden" style="width: 280px;" aria-expanded="searchDrop">
-                      <form class="p-2 mb-2 border-bottom">
-                        <input type="text" class="form-control" oninput="search()" autocomplete="false" placeholder="Поиск релизов" id="navSearch">
-                      </form>
-                      <ul class="list-unstyled mb-0" id="navSearchResult">
-                        <li hidden><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
-                          <span class="d-inline-block bg-success rounded-circle" style="width: .5em; height: .5em;"></span>
-                          Действие
-                          </a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">Введите название для поиска</a>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                </li>
               </ul>
-
+                <div class="d-flex">
+                    <div class="dropdown">
+                      <a class="text-light btn btn-outline-danger my-2 dropdown-toggle" href="#" role="button" id="searchDrop" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-search"></i> Поиск
+                      </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg pt-0 mx-0 shadow overflow-hidden" style="width: 380px;" aria-expanded="searchDrop">
+                            <form class="p-2 mb-2 border-bottom">
+                              <input type="text" class="form-control" oninput="search()" autocomplete="false" placeholder="Поиск релизов" id="navSearch">
+                            </form>
+                            <ul class="list-unstyled mb-0" id="navSearchResult">
+                              <li hidden><a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                <span class="d-inline-block bg-success rounded-circle" style="width: .5em; height: .5em;"></span>
+                                Действие
+                                </a>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="#">Введите название для поиска</a>
+                              </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </nav>
@@ -176,14 +174,8 @@
         <div class="main w-100">
             <div class="container">
                 <div class="row">
-                    <div class="col rounded p-3 mb-5" id="releasePage">
-                        <div class="row">
-                            <div class="col bg-light rounded shadow p-3">
-                                <div class="d-flex justify-content-center">
-                                    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col rounded p-3 mb-5" id="mainBlank">
+
                     </div>
                 </div>
             </div>
@@ -216,6 +208,15 @@
     </div>
     <!-- templates -->
     <div hidden>
+        <div id="pageCalendar">
+            <div class="row bg-light rounded-3 shadow p-3">
+                <div class="col">
+                    <h2><i class="fas fa-calendar-alt"></i> Расписание</h2>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
         <div id="pageReleases">
             <div class="row row-cols-1 bg-light p-3 rounded-3 shadow">
                 <div class="col">
@@ -379,9 +380,32 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div id="page404">
+                <div class="row bg-light rounded-3 p-3">
+                    <div class="col d-flex justify-content-center">
+                        <h2>404 Нечего не найдено</h2>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+
+            <div id="spin">
+                <div class="row">
+                    <div class="col bg-light rounded shadow p-3">
+                        <div class="d-flex justify-content-center">
+                            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pageTeam">
 
             </div>
-            <div id="pageReleaseWath">
+
+            <div id="pageReleaseWatch">
                 <div class="row bg-light p-3 rounded-3 shadow">
                     <div class="col-9">
                         <h2 id="releaseTitle"></h2>
@@ -451,26 +475,13 @@
     <!-- scripts -->
     <script src="./assets/scripts/player.js"></script>
     <script src="./assets/scripts/app.js"></script>
+    <script src="./assets/scripts/router.js"></script>
     <script>
-        function getUrlVars() {
-            var vars = {};
-            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-            vars[key] = value;
-            });
-            return vars;
-        }
+
+
+        hashRouter()
         
-        var releaseId = getUrlVars()['r'];
-        if(releaseId){
-            loadRelease(releaseId)
-        }
-        else{
-            document.getElementById('releasePage').innerHTML=null;
-            document.getElementById('releasePage').appendChild(document.getElementById('pageReleases'));
-            document.title = 'Вышедшие релизы'
-            loadReleases();
-            loadFilters()
-        }
+
 
     </script>
 </body>

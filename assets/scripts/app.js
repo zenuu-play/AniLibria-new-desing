@@ -20,7 +20,7 @@ function search(){
                         status = 'warning'
                     }
                     resultItem = document.createElement('li')
-                    resultItem.innerHTML=`<a class="dropdown-item" href="./release?r=${element.id}"><span class="d-inline-block bg-${status} rounded-circle" style="width: .5em; height: .5em;"></span> ${element.names.ru}</a>`
+                    resultItem.innerHTML=`<a class="dropdown-item" href="./release#watch?r=${element.id}"><span class="d-inline-block bg-${status} rounded-circle" style="width: .5em; height: .5em;"></span> ${element.names.ru}</a>`
                     resultOut.appendChild(resultItem)
                 });
                 if(!response[0]){
@@ -39,13 +39,13 @@ function randomTitle(){
         url: 'https://api.anilibria.tv/v2/getRandomTitle',
         data: 'filter=code,names,id',
         success: function(response){
-            window.location.search="r="+ response.id
+            window.location.hash="#watch?r="+ response.id
         }
     })
 }
 var limit = 36
 function loadReleases(more){
-    var loader = document.querySelector('.lds-ellipsis')
+    var loader = document.querySelector('#loader')
 
     if(loader.getAttribute('hidden') == ''){
         loader.removeAttribute('hidden')
@@ -88,7 +88,7 @@ function loadReleases(more){
                 card = document.createElement('div')
                 card.className='col'
                 card.innerHTML=`
-                <a href="./release?r=${elem.id}"><div class="card p-2 m-0 shadow btn" type="button">
+                <a href="./release#watch?r=${elem.id}"><div class="card p-2 m-0 shadow btn" type="button">
                 <img class="img rounded-1" src="https://static.anilibria.tv${elem.poster.url}" alt="">
                     <div style="text-align: center;" class="pt-1">
                         <h5 hidden class="text-danger">${elem.names.ru}</h5>
@@ -106,31 +106,38 @@ function loadReleases(more){
 }
 
 
-function loadRelease(rid, code){
+function loadRelease(){
+    var rid = getUrlVars()['r']
     var elTorrents = document.getElementById('torrents')
+
     $.get({
         url: 'https://api.anilibria.tv/v2/getTitle',
         data: 'id='+rid,
         statusCode: {
             404: function() {
-                document.getElementById('releasePage').innerHTML=`<h1>Нечего не найдено :/</h1>`
+                document.getElementById('mainBlank').innerHTML=`<h1>Нечего не найдено :/</h1>`
             }
         },
         success: function(response){
 
-            document.getElementById('releasePage').innerHTML=null;
-            document.getElementById('releasePage').appendChild(document.getElementById('pageReleaseWath'));
-
-            document.title = response.names.ru + " / " + response.names.en
-            document.getElementById('releasePoster').setAttribute('src' , `https://www.anilibria.tv/${response.poster.url}`)
-            document.getElementById('releaseTitleEn').innerHTML=response.names.en
-
             if(response.status.string == 'В работе'){
                 document.getElementById('releaseTitle').innerHTML=`${response.names.ru} <span class="badge bg-success">Выходит</span>`
+
+                if(response.announce){
+                    document.getElementById('announce').innerHTML=`${response.announce}`
+                }
+
             }else{
                 document.getElementById('releaseTitle').innerHTML= response.names.ru
             }
 
+            if(response.names.alternative){
+                document.getElementById('releaseTitleAlt').innerHTML=response.names.alternative
+            }
+    
+            document.title = response.names.ru + " / " + response.names.en
+            document.getElementById('releasePoster').setAttribute('src' , `https://www.anilibria.tv/${response.poster.url}`)
+            document.getElementById('releaseTitleEn').innerHTML=response.names.en
             document.getElementById('season').innerHTML=`Сезон: <span class="text-dark">${response.season.string} ${response.season.year}</span>`
             document.getElementById('type').innerHTML=`Тип: <span class="text-dark">${response.type.string} (${response.type.full_string})</span>`
             document.getElementById('genres').innerHTML=`Жанры: <span class="text-dark">${response.genres}</span>`
@@ -138,17 +145,12 @@ function loadRelease(rid, code){
             document.getElementById('timings').innerHTML=`Тайминги: <span class="text-dark">${response.team.timing}</span>`
             document.getElementById('subs').innerHTML=`Субтитры: <span class="text-dark">${response.team.translator}</span>`
             document.getElementById('disc').innerHTML=`<span class="text-dark">${response.description}</span>`
-            
-            if(response.announce && response.status.string == 'В работе'){
-                document.getElementById('announce').innerHTML=`${response.announce}`
-            }
-
-
             document.getElementById('oldLink').setAttribute('href', `https://www.anilibria.tv/release/${response.code}.html`)
 
-
             response.torrents.list.forEach(elem =>{
+
                 var item = document.createElement('div')
+                
                 item.className=``
                 item.innerHTML=`
                 <div class="torrent p-2 mt-2 mb-2 d-flex justify-content-center align-items-center">
@@ -164,15 +166,9 @@ function loadRelease(rid, code){
                     <span class="px-2"><i class="fas fa-calendar-plus"></i> ${timestampToDate(elem.uploaded_timestamp*1000)}</span>
                     <a class="btn btn-sm btn-outline-danger" href="https://www.anilibria.tv/${elem.url}">Скачать</a>
                 </div>`
-
                 elTorrents.appendChild(item)
+
             })
-
-            if(response.names.alternative){
-                document.getElementById('releaseTitleAlt').innerHTML=response.names.alternative
-            }
-
-            var playList = response.player.playlist;
 
             var i = 1
             var b = response.player.series.last
@@ -181,15 +177,11 @@ function loadRelease(rid, code){
             for(i; i <= b; i++){
                 list[i] = { "title":`Серия: ${response.player.playlist[i].serie}`, "file":`[720p]//${response.player.host}${response.player.playlist[i].hls.hd}, [480p]//${response.player.host}${response.player.playlist[i].hls.sd}`  }
             }
-
             list[0] = {};
+            var player = new Playerjs({id:"player", file: list});
 
-            var player = new Playerjs({id:"player", 
-            file: list});
-
-            console.log(list)
-
-            console.log(response)
+            //Debug
+            //console.log(response)
         }
     })
 }
@@ -314,7 +306,7 @@ function loadUpdates(){
                 var item = document.createElement('div')
                 item.className=`col`
                 item.innerHTML=`
-                <a class="lastUpdateItem" href="./release?r=${elem.id}">
+                <a class="lastUpdateItem" href="./release#watch?r=${elem.id}">
                   <span class="position-absolute badge bg-light text-dark m-2">${new Date(elem.updated*1000).toLocaleTimeString("ru-RU")}</span>
                   <img src="https://static.anilibria.tv/${elem.poster.url}" alt="" width="150" class="rounded-1 shadow">
                 </a>`
@@ -404,4 +396,33 @@ function getUrlSelected(selected = getSelected()){
     return out
 }
 
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.hash.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    vars[key] = value;
+    });
+    return vars;
+}
+
+
+
+// onscroll=function(){
+//     var el = document.querySelector('.navbar')
+//     var elLink = document.querySelectorAll('.nav-link')
+//     if(window.pageYOffset >= 300){
+        
+//         el.style.backgroundColor = '#fff'
+//         elLink.forEach(element =>{
+//             element.style.color='#000'
+//         })
+//     }
+//     else{
+//         elLink.forEach(element =>{
+//             element.style.color=''
+//         })
+        
+//         el.style.backgroundColor = ''
+
+//     }
+// }
 
