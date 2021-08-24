@@ -310,7 +310,7 @@ function loadUpdates(){
 }
 
 function loadCalendar(mainEl = 'pageCalendar'){
-    var mainEl, opened = 'hide'
+    var mainEl, opened = {}
     var el = document.getElementById('calendar')
     var days = [
         'Понедельник',
@@ -334,25 +334,28 @@ function loadCalendar(mainEl = 'pageCalendar'){
                 var calendarItem = document.createElement('div')
 
                 if(date.getDay() == elem.day+1){
-                    opened = 'show'
+                    opened.state = 'show'
+                    opened.collapsed = ''
+                    opened.bool = true
                     days[elem.day] = days[elem.day] +" [Сегодня]"
                 }
                 else{
-                    opened = 'hide'
+                    opened.state = ''
+                    opened.collapsed = 'collapsed'
+                    opened.bool = false
                 }
 
                 calendarItem.className='accordion-item'
-                calendarItem.innerHTML=`
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#day${elem.day}-collapseOne" aria-expanded="false">
+                calendarItem.innerHTML=`  
+                <h2 class="accordion-header" id="heading${days[elem.day]}">
+                  <button class="accordion-button ${opened.collapsed}" type="button" data-bs-toggle="collapse" data-bs-target="#day${elem.day}-collapse" aria-expanded="${opened.bool}" aria-controls="day${elem.day}-collapse">
                    ${days[elem.day]}
                   </button>
                 </h2>
-                <div id="day${elem.day}-collapseOne" class="accordion-collapse collapse ${opened}">
-                  <div class="accordion-body">
-                      <div class="row row-cols-2 calendarItems">
 
-                      </div>
+                <div id="day${elem.day}-collapse" class="accordion-collapse collapse ${opened.state}" aria-labelledby="heading${days[elem.day]}" data-bs-parent="#calendar">
+                  <div class="accordion-body">
+                      <div class="row row-cols-2 calendarItems"></div>
                   </div>
                 </div>`
                 elem.list.forEach(item =>{
