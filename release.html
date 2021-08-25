@@ -174,7 +174,7 @@
 
         <!-- main start -->
         <div class="main w-100">
-            <div class="container">
+            <div class="container-md">
                 <div class="row">
                     <div class="col rounded p-3 mb-5" id="mainBlank">
 
@@ -256,8 +256,8 @@
                 </div>
             </div>
 
-            <div class="row p-0 mt-4">
-                <div class="col-3 bg-light rounded-3 shadow p-4" style="max-height: 600px;">
+            <div class="row p-0 mt-4 m-0">
+                <div class="col col-lg-3 col-sm bg-light rounded-3 shadow p-4 mb-4" style="max-height: 600px;">
                     <h3><i class="fas fa-filter"></i> Фильтр</h3>
                     <span class="text-danger">Временно не работает</span>
                     <hr>
@@ -380,7 +380,7 @@
                     </div>
                     </div>
                     <div class="col h-100">
-                        <div class="row row-cols-4 g-2" id="releases"></div>
+                        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2" id="releases"></div>
                         <div class="d-flex justify-content-center pt-3">
                             <div class="d-flex justify-content-center flex-column align-items-center" id="loader">
                                 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
@@ -630,13 +630,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row bg-light p-3 rounded-3 shadow releasePage">
-                    <div class="col-9">
+                <div class="row bg-light py-3 px-1 px-md-3 rounded-3 shadow releasePage">
+                    <div class="col col-md-9">
                         <h2 id="releaseTitle" class="placeholder-glow"></h2>
                         <h4 id="releaseTitleEn"><span class="placeholder"></span></h4>
                         <h5 id="releaseTitleAlt"><span class="placeholder"></span></h5>
                         <hr>
-                        <div class="discription">
+                        <div class="description">
                             <div class="text-secondary d-flex flex-column justify-content-evenly" style="font-size: large;">
                                 <span id="season"><span class="placeholder"></span></span>
                                 <span id="type"><span class="placeholder"></span></span>
@@ -655,8 +655,8 @@
                             <a id="oldLink" class="btn btn-outline-danger">Открыть на ориг. сайте</a>
                         </div>
                     </div>
-                    <div class="row p-0 row-cols-2">
-                        <div class="col-9 p-3 mt-5" style="z-index: 9999!important;"> 
+                    <div class="row row-cols-1 p-0 m-0">
+                        <div class="col p-0 p-md-3 mt-5" style="z-index: 9999!important;"> 
                             <div class="player" >
                                 <div class="pTabs">
                                     <button class="btn btn-sm btn-danger" onclick="light()"><i class="fas fa-lightbulb"></i> Свет</button>
@@ -676,15 +676,15 @@
                             Тут могла быть ваша реклама:)
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-9">
+                    <div class="row row-cols-1">
+                        <div class="col">
                             <h4><i class="fas fa-download"></i> Торренты для скачивания</h4>
                             <hr>
                             <div id="torrents">
 
                             </div>
                         </div>
-                        <div class="col-9 pt-3">
+                        <div class="col pt-3">
                             <h4><i class="fas fa-comments"></i> Комментарии</h4>
                             <hr>
                             <span>Временно недоступны</span>

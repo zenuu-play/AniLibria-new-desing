@@ -119,7 +119,7 @@ function loadRelease(mainEl){
 
     $.get({
         url: 'https://api.anilibria.tv/v2/getTitle',
-        data: 'id='+rid,
+        data: 'description_type=html&id='+rid,
         statusCode: {
             404: function() {
                 document.getElementById('mainBlank').innerHTML=`<h1>Нечего не найдено :/</h1>`
@@ -160,18 +160,18 @@ function loadRelease(mainEl){
 
                 item.className=``
                 item.innerHTML=`
-                <div class="torrent p-2 mt-2 mb-2 d-flex justify-content-center align-items-center">
-                    <span class="px-2">Серия ${elem.series.string} [${elem.quality.string}]</span>
-                    <span class="vr"></span>
-                    <span class="px-2"><i class="fas fa-file"></i> ${formatBytes(elem.total_size)}</span>
-                    <span class="vr"></span>
-                    <span class="px-2"><i class="fas fa-upload text-success"></i> ${elem.seeders}</span>
-                    <span class="px-2"><i class="fas fa-download text-primary"></i> ${elem.leechers}</span>
-                    <span class="vr"></span>
-                    <span class="px-2"><i class="fas fa-file-download text-danger"></i> ${elem.downloads}</span>
-                    <span class="vr"></span>
-                    <span class="px-2"><i class="fas fa-calendar-plus"></i> ${timestampToDate(elem.uploaded_timestamp*1000)}</span>
-                    <a class="btn btn-sm btn-outline-danger" href="https://www.anilibria.tv/${elem.url}">Скачать</a>
+                <div class="torrent p-2 mt-2 mb-2 d-flex d-flex flex-column-reverse justify-content-center align-items-center">
+                        <span class="px-2">Серия ${elem.series.string} [${elem.quality.string}]</span>
+                        <span class="vr"></span>
+                        <span class="px-2"><i class="fas fa-file"></i> ${formatBytes(elem.total_size)}</span>
+                        <span class="vr"></span>
+                        <span class="px-2"><i class="fas fa-upload text-success"></i> ${elem.seeders}</span>
+                        <span class="px-2"><i class="fas fa-download text-primary"></i> ${elem.leechers}</span>
+                        <span class="vr"></span>
+                        <span class="px-2"><i class="fas fa-file-download text-danger"></i> ${elem.downloads}</span>
+                        <span class="vr"></span>
+                        <span class="px-2"><i class="fas fa-calendar-plus"></i> ${timestampToDate(elem.uploaded_timestamp*1000)}</span>
+                        <a class="btn btn-sm btn-outline-danger" href="https://www.anilibria.tv/${elem.url}">Скачать</a>
                 </div>`
                 elTorrents.appendChild(item)
 
@@ -274,7 +274,7 @@ function loadBlog(){
         data: 'limit=-1',
         success: function(response){
             response = response.reverse()
-            response = response.slice(0, 8)
+            response = response.slice(0, 9)
 
             response.forEach(elem =>{
                 var item = document.createElement('div')
@@ -328,7 +328,6 @@ function loadCalendar(mainEl = 'pageCalendar'){
         url: 'https://api.anilibria.tv/v2/getSchedule',
         data: 'filter=poster,names,id,status,type,day,player,series',
         success: function(response){
-            
             response.forEach(elem =>{
 
                 var calendarItem = document.createElement('div')
@@ -355,7 +354,7 @@ function loadCalendar(mainEl = 'pageCalendar'){
 
                 <div id="day${elem.day}-collapse" class="accordion-collapse collapse ${opened.state}" aria-labelledby="heading${days[elem.day]}" data-bs-parent="#calendar">
                   <div class="accordion-body">
-                      <div class="row row-cols-2 calendarItems"></div>
+                      <div class="row row-cols-1 row-cols-md-2 calendarItems"></div>
                   </div>
                 </div>`
                 elem.list.forEach(item =>{
@@ -380,7 +379,7 @@ function loadCalendar(mainEl = 'pageCalendar'){
 
                 el.appendChild(calendarItem)
             })
-
+                window.location.href="#calendar"
         }
     })
 

@@ -391,3 +391,10 @@ hr{
     border-radius: 0 0 5px 5px;
     border-top:  none;
 }
+.accordion-button:not(.collapsed)::after {
+    color: #fff!important;
+}
+.description{
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
